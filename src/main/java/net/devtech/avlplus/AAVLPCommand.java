@@ -17,16 +17,22 @@ public class AAVLPCommand implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			Chunk chunk = player.getLocation().getChunk();
-			int count = 0;
-			for (Entity entity : chunk.getEntities()) { // get entities in the chunk the player is in
-				if (entity instanceof Villager) { // filter villagers only
-					count++;
-					NormalActivityTask.activateVillager((Villager) entity); // activate all the villagers and prevent them from being
-				}
-			}
+			Point point = new Point(chunk.getX(), chunk.getZ());
 
-			AvlPlus.VANILLA_CHUNKS.add(new Point(chunk.getX(), chunk.getZ()));
-			player.sendMessage(ChatColor.GREEN + "Your " + count + " villagers have come back to life!");
+			if(AvlPlus.VANILLA_CHUNKS.contains(point)) {
+				AvlPlus.VANILLA_CHUNKS.remove(point);
+				player.sendMessage(ChatColor.DARK_GREEN+"This chunk has been reverted to AVL mechanics!");
+			} else {
+				int count = 0;
+				for (Entity entity : chunk.getEntities()) { // get entities in the chunk the player is in
+					if (entity instanceof Villager) { // filter villagers only
+						count++;
+						NormalActivityTask.activateVillager((Villager) entity); // activate all the villagers and prevent them from being
+					}
+				}
+				AvlPlus.VANILLA_CHUNKS.add(new Point(chunk.getX(), chunk.getZ()));
+				player.sendMessage(ChatColor.GREEN + "Your " + count + " villagers have come back to life!");
+			}
 			return true;
 		} else {
 			sender.sendMessage(ChatColor.RED + "You must be a player to execute this command!");

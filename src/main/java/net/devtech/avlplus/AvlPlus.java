@@ -71,7 +71,6 @@ public class AvlPlus extends JavaPlugin {
 		if (!file.exists()) this.saveAAVLP();
 		YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 		configuration.getLongList("chunks").stream().mapToLong(Long::longValue).mapToObj(l -> new Point((int) (l >> 32), (int) l)).forEach(VANILLA_CHUNKS::add);
-
 	}
 
 	public void saveAAVLP() throws IOException {
