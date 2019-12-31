@@ -1,16 +1,9 @@
-# Spigot-Template
-template project for making spigot plugins
+# Anti-Villager-Lag-Plus
+Reduces lag from villagers by decreasing the interval in which they pathfind, while still allowing users to use farms that rely on 100% vanilla behavior.
 
-## Features
-automatically downloads paper for testing your plugins without having to include it in your repo or install it every time you clone it
-
-shades in paperlib
-
-uses bukkit api for more compatibility, but you can change it to spigot
-
-auto-fills plugin.yml based on gradle.properties
-
-auto-checks for main class to ensure it is valid
-
-already packs in shadow plugin
-
+## How to use
+https://www.spigotmc.org/resources/villager-optimiser-1-14-2-1-15.68517/
+the config has remained untouched, the only difference is 2 new commands added
+  /aavlp - blacklists the chunk the player is in to avlp, meaning villager mechanics in the given chunk will be 100% vanilla
+  /vlp - checks if the chunk the player is in is blacklisted by /aavlp
+the chunks that are blacklisted are saved automatically when the server closes
