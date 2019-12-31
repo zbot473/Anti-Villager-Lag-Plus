@@ -334,7 +334,7 @@ public class Metrics {
 	 *
 	 * @param chart The chart to add.
 	 */
-	public void addCustomChart(Plugin chart) {
+	public void addCustomChart(CustomChart chart) {
 		if (chart == null) {
 			throw new IllegalArgumentException("Chart cannot be null!");
 		}
