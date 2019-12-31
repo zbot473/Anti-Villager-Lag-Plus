@@ -7,8 +7,8 @@ this is the plugin that I have editted, thankfully the author chose a good licen
 
 the core functionality of the plugin has remained untouched, the only difference is 2 new commands added
 
-  /aavlp - blacklists the chunk the player is in to avlp, meaning villager mechanics in the given chunk will be 100% vanilla
+**`/aavlp`** - blacklists the chunk the player is in to avlp, meaning villager mechanics in the given chunk will be 100% vanilla
   
-  /vlp - checks if the chunk the player is in is blacklisted by /aavlp
+**`/vlp`** - checks if the chunk the player is in is blacklisted by /aavlp
   
 the chunks that are blacklisted are saved automatically when the server closes
