@@ -7,8 +7,11 @@ this is the plugin that I have editted, thankfully the author chose a good licen
 
 the core functionality of the plugin has remained untouched, the only difference is 2 new commands added
 
-**`/aavlp`** - blacklists the chunk the player is in to avlp, meaning villager mechanics in the given chunk will be 100% vanilla
+**`/aavlp`** - toggles the chunk the player is in to avlp, meaning villager mechanics in the given chunk will be 100% vanilla. You must grant permissions `avlp.vanilla` for players to use this command
+
   
-**`/vlp`** - checks if the chunk the player is in is blacklisted by /aavlp
+**`/vlp`** - checks if the chunk the player is in is blacklisted by /aavlp. You must grant permissions `avlp.check` to allow players to use this command
   
 the chunks that are blacklisted are saved automatically when the server closes
+
+AVLP is now on the spigot resources forum thing: https://www.spigotmc.org/resources/villager-optimizer-plus.73933/
