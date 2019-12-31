@@ -1,4 +1,4 @@
-package com.froobworld.avl.metrics;
+package net.devtech.avlplus.metrics;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -334,7 +334,7 @@ public class Metrics {
 	 *
 	 * @param chart The chart to add.
 	 */
-	public void addCustomChart(CustomChart chart) {
+	public void addCustomChart(Plugin chart) {
 		if (chart == null) {
 			throw new IllegalArgumentException("Chart cannot be null!");
 		}

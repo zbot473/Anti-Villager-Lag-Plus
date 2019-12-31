@@ -1,6 +1,6 @@
-package com.froobworld.avl.tasks;
+package net.devtech.avlplus.tasks;
 
-import com.froobworld.avl.Avl;
+import net.devtech.avlplus.AvlPlus;
 import org.bukkit.Bukkit;
 import java.lang.reflect.InvocationTargetException;
 
@@ -8,12 +8,12 @@ public class CompatibilityCheckTask implements Runnable {
 	private final static String NAME = Bukkit.getServer().getClass().getPackage().getName();
 	private final static String VERSION = NAME.substring(NAME.lastIndexOf('.') + 1);
 
-	private Avl avl;
+	private AvlPlus avl;
 	private String[] supportedVersions = new String[]{"v1_14_R1", "v1_15_R1"};
 
 	private boolean pass;
 
-	public CompatibilityCheckTask(Avl avl) {
+	public CompatibilityCheckTask(AvlPlus avl) {
 		this.avl = avl;
         this.run();
 	}
@@ -44,7 +44,7 @@ public class CompatibilityCheckTask implements Runnable {
 	}
 
 	private void disablePlugin(String message) {
-		Avl.logger().warning(message);
+		AvlPlus.logger().warning(message);
 		Bukkit.getPluginManager().disablePlugin(this.avl);
 	}
 

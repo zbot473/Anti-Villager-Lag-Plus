@@ -1,7 +1,7 @@
-package com.froobworld.avl.tasks;
+package net.devtech.avlplus.tasks;
 
-import com.froobworld.avl.Avl;
-import com.froobworld.avl.utils.ActivityUtils;
+import net.devtech.avlplus.AvlPlus;
+import net.devtech.avlplus.utils.ActivityUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +12,7 @@ public class NormalActivityTask implements Runnable {
 	public void run() {
 		for (World world : Bukkit.getWorlds()) {
 			for (LivingEntity entity : world.getLivingEntities()) {
-				if (entity instanceof Villager && !Avl.isInVanilla(entity)) {
+				if (entity instanceof Villager && !AvlPlus.isInVanilla(entity)) {
 					activateVillager((Villager) entity);
 				}
 			}

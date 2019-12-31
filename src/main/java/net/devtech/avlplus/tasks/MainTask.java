@@ -1,14 +1,14 @@
-package com.froobworld.avl.tasks;
+package net.devtech.avlplus.tasks;
 
-import com.froobworld.avl.Avl;
+import net.devtech.avlplus.AvlPlus;
 import org.bukkit.Bukkit;
 
 public class MainTask implements Runnable {
 	private final NormalActivityTask activityTask;
 	private final RemoveActivityTask removeTask;
-	private Avl avl;
+	private AvlPlus avl;
 
-	public MainTask(Avl avl) {
+	public MainTask(AvlPlus avl) {
 		this.avl = avl;
 
 		this.activityTask = new NormalActivityTask();

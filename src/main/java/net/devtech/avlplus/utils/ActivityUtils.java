@@ -1,4 +1,4 @@
-package com.froobworld.avl.utils;
+package net.devtech.avlplus.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

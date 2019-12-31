@@ -1,6 +1,6 @@
-package com.froobworld.avl;
+package net.devtech.avlplus;
 
-import com.froobworld.avl.utils.ConfigUpdater;
+import net.devtech.avlplus.utils.ConfigUpdater;
 import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,14 +12,14 @@ import java.util.List;
 public class AvlConfiguration {
 	public static final int CONFIG_CURRENT_VERSION = 1;
 
-	private Avl avl;
+	private AvlPlus avl;
 	private int currentVersion;
 	private String fileName;
 	private String fileNameDashed;
 	private YamlConfiguration config;
 	private boolean loaded;
 
-	public AvlConfiguration(Avl avl, int currentVersion, String fileName) {
+	public AvlConfiguration(AvlPlus avl, int currentVersion, String fileName) {
 		this.avl = avl;
 		this.currentVersion = currentVersion;
 		this.fileName = fileName;
@@ -30,45 +30,45 @@ public class AvlConfiguration {
 
 	public synchronized void loadFromFile() {
         this.loaded = true;
-		Avl.logger().info("Loading " + this.fileName + "...");
+		AvlPlus.logger().info("Loading " + this.fileName + "...");
 		File configFile = new File(this.avl.getDataFolder(), this.fileName);
 		if (!configFile.exists()) {
-			Avl.logger().info("Couldn't find existing " + this.fileName + ", copying default from jar...");
+			AvlPlus.logger().info("Couldn't find existing " + this.fileName + ", copying default from jar...");
 			try {
                 this.avl.getDataFolder().mkdirs();
 				Files.copy(this.avl.getResource(this.fileName), configFile.toPath());
 			} catch (IOException e) {
-				Avl.logger().warning("There was a problem copying the default " + this.fileName + ":");
+				AvlPlus.logger().warning("There was a problem copying the default " + this.fileName + ":");
                 this.config = YamlConfiguration.loadConfiguration(new BufferedReader(new InputStreamReader(this.avl.getResource("resources/" + this.fileName))));
 				e.printStackTrace();
-				Avl.logger().info("We may still be able to run...");
+				AvlPlus.logger().info("We may still be able to run...");
 				return;
 			}
 		}
         this.config = YamlConfiguration.loadConfiguration(configFile);
-		Avl.logger().info("Successfully loaded " + this.fileName + ".");
+		AvlPlus.logger().info("Successfully loaded " + this.fileName + ".");
 
 		if (this.config.contains("version")) {
 			int version = this.config.getInt("version");
 			if (version > this.currentVersion) {
-				Avl.logger().warning("Your're using a " + this.fileName + " for a higher version. This may lead to some issues.");
-				Avl.logger().info("You may wish to regenerate this file by deleting it and reloading.");
+				AvlPlus.logger().warning("Your're using a " + this.fileName + " for a higher version. This may lead to some issues.");
+				AvlPlus.logger().info("You may wish to regenerate this file by deleting it and reloading.");
 			}
 			if (version < this.currentVersion) {
-				Avl.logger().info("Your " + this.fileName + " is out of date. Will attempt to perform upgrades...");
+				AvlPlus.logger().info("Your " + this.fileName + " is out of date. Will attempt to perform upgrades...");
 				for (int i = version; i < this.currentVersion; i++) {
 					if (ConfigUpdater.update(configFile, this.avl.getResource("resources/" + this.fileNameDashed + "-updates/" + i), i)) {
-						Avl.logger().info("Applied changes for " + this.fileName + " version " + i + " to " + (i + 1) + ".");
+						AvlPlus.logger().info("Applied changes for " + this.fileName + " version " + i + " to " + (i + 1) + ".");
 					} else {
-						Avl.logger().warning("Failed to apply changes for " + this.fileName + " version " + i + " to " + (i + 1) + ".");
+						AvlPlus.logger().warning("Failed to apply changes for " + this.fileName + " version " + i + " to " + (i + 1) + ".");
 						return;
 					}
 				}
-				Avl.logger().info("Successfully updated " + this.fileName + "!");
+				AvlPlus.logger().info("Successfully updated " + this.fileName + "!");
                 this.config = YamlConfiguration.loadConfiguration(configFile);
 			}
 		} else {
-			Avl.logger().warning("Your " + this.fileName + " either hasn't loaded properly or is not versioned. This may lead to problems.");
+			AvlPlus.logger().warning("Your " + this.fileName + " either hasn't loaded properly or is not versioned. This may lead to problems.");
 		}
 	}
 

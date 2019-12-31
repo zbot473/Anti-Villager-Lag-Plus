@@ -1,6 +1,6 @@
-package com.froobworld.avl;
+package net.devtech.avlplus;
 
-import com.froobworld.avl.tasks.NormalActivityTask;
+import net.devtech.avlplus.tasks.NormalActivityTask;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.command.Command;
@@ -25,7 +25,7 @@ public class AAVLPCommand implements CommandExecutor {
 				}
 			}
 
-			Avl.VANILLA_CHUNKS.add(new Point(chunk.getX(), chunk.getZ()));
+			AvlPlus.VANILLA_CHUNKS.add(new Point(chunk.getX(), chunk.getZ()));
 			player.sendMessage(ChatColor.GREEN + "Your " + count + " villagers have come back to life!");
 			return true;
 		} else {

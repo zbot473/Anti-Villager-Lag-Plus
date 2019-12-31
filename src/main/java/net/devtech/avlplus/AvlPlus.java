@@ -1,18 +1,16 @@
-package com.froobworld.avl;
+package net.devtech.avlplus;
 
-import com.froobworld.avl.metrics.Metrics;
-import com.froobworld.avl.tasks.CompatibilityCheckTask;
-import com.froobworld.avl.tasks.MainTask;
+import net.devtech.avlplus.metrics.Metrics;
+import net.devtech.avlplus.tasks.CompatibilityCheckTask;
+import net.devtech.avlplus.tasks.MainTask;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import java.awt.Point;
@@ -24,11 +22,12 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class Avl extends JavaPlugin {
+public class AvlPlus extends JavaPlugin {
 	private BukkitTask task;
 	private AvlConfiguration config;
 
 	// I could replace this with a LongSet but for some reason craftbukkit wont import
+	// it's micro optimizations anyways :P
 	public static final Set<Point> VANILLA_CHUNKS = new HashSet<>();
 
 	@Override
@@ -43,17 +42,7 @@ public class Avl extends JavaPlugin {
 				new Metrics(this);
 
 				Objects.requireNonNull(this.getCommand("aavlp")).setExecutor(new AAVLPCommand());
-				Objects.requireNonNull(this.getCommand("vlp")).setExecutor((sender, command, label, args) -> {
-					if(sender instanceof Player) {
-						if(isInVanilla((Entity) sender))
-							sender.sendMessage(ChatColor.GREEN+"This chunk is using vanilla mechanics!");
-						else
-							sender.sendMessage(ChatColor.DARK_GREEN+"This chunk is using Avl mechanics!");
-						return true;
-					}
-					sender.sendMessage("must be a player to execute this command!");
-					return false;
-				});
+				Objects.requireNonNull(this.getCommand("vlp")).setExecutor(AvlPlus::vlp);
 				logger().info("Successfully enabled.");
 
 				this.loadAAVLP();
@@ -102,10 +91,21 @@ public class Avl extends JavaPlugin {
 	}
 
 	public static Logger logger() {
-		return JavaPlugin.getPlugin(Avl.class).getLogger();
+		return JavaPlugin.getPlugin(AvlPlus.class).getLogger();
 	}
 
 	public AvlConfiguration getAvlConfig() {
 		return this.config;
+	}
+
+	private static boolean vlp(CommandSender sender, Command command, String label, String[] args) {
+		if (sender instanceof Player) {
+			if (isInVanilla((Entity) sender))
+				sender.sendMessage(ChatColor.GREEN + "This chunk is using vanilla mechanics!");
+			else sender.sendMessage(ChatColor.DARK_GREEN + "This chunk is using Avl mechanics!");
+			return true;
+		}
+		sender.sendMessage("must be a player to execute this command!");
+		return false;
 	}
 }
