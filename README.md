@@ -13,3 +13,5 @@ the core functionality of the plugin has remained untouched, the only difference
 **`/vlp`** - checks if the chunk the player is in is blacklisted by /aavlp. You must grant permissions `avlp.check` to allow players to use this command
   
 the chunks that are blacklisted are saved automatically when the server closes
+
+AVLP is now on the spigot resources forum thing: https://www.spigotmc.org/resources/villager-optimizer-plus.73933/
