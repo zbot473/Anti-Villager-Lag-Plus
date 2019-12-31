@@ -3,3 +3,13 @@ version: @version@
 main: @group@.@pluginname@.@pluginName@
 api-version: 1.13
 authors: [HalfOf2]
+description: "A version of avl that allows users to enable vanilla villagers in chunks, so that farms that rely on vanilla behavior are left untouched"
+commands:
+  aavlp:
+    description: prevents avlplus from modifying villagers in the chunk the player is currently standing in (anti anti villager lag prevention)
+    permission: avlp.vanilla
+    usage: '/aavlp'
+  vlp:
+    description: tells you if the chunk you're in is using vanilla mechanics
+    permission: avlp.check
+    usage: '/vlp'
